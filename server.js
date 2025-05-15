@@ -20,7 +20,22 @@ app.use(bodyParser.urlencoded({limit: '50mb', extended:true}));
 
 app.use(
   cors({
-    origin: 'https://cravecrafters-frontend.onrender.com/',
+    origin: (origin, callback) => {
+      // Normalize origins by removing trailing slashes
+      const normalizeOrigin = (url) => url?.replace(/\/+$/, '');
+      
+      const allowedOrigins = [
+        normalizeOrigin('http://localhost:3000'), // For local development
+        normalizeOrigin('https://cravecrafters-frontend.onrender.com'), // For production
+        normalizeOrigin(process.env.FRONTEND_URL), // From Render env variable
+      ].filter(Boolean); // Remove undefined/null values
+
+      if (!origin || allowedOrigins.includes(normalizeOrigin(origin))) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization', 'authorization', 'x-auth-token'],
     credentials: true,
