@@ -25,7 +25,7 @@ app.use(
       const normalizeOrigin = (url) => url?.replace(/\/+$/, '');
       
       const allowedOrigins = [
-        normalizeOrigin('http://localhost:3000'), // For local development
+      
         normalizeOrigin('https://cravecrafters-frontend.onrender.com'), // For production
         normalizeOrigin(process.env.FRONTEND_URL), // From Render env variable
       ].filter(Boolean); // Remove undefined/null values
