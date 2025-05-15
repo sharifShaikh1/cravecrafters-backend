@@ -28,7 +28,7 @@ router.post('/create-checkout-session', auth, async (req, res) => {
 
     if (!lineItems.length) return res.status(400).json({ message: 'No items' });
 
-    const frontendUrl = process.env.FRONTEND_URL || 'https://cravecrafters-frontend.onrender.com/';
+    const frontendUrl = process.env.FRONTEND_URL || 'https://cravecrafters-frontend.onrender.com';
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
       line_items: lineItems,
