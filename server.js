@@ -20,7 +20,7 @@ app.use(bodyParser.urlencoded({limit: '50mb', extended:true}));
 
 app.use(
   cors({
-    origin: 'http://localhost:3000',
+    origin: 'https://cravecrafters-frontend.onrender.com/',
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization', 'authorization', 'x-auth-token'],
     credentials: true,
